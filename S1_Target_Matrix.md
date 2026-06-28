@@ -21,12 +21,10 @@ This matrix tracks elite systems engineering candidates from the Edinburgh Syste
 
 This matrix tracks absolute top-tier systems engineering talents globally required to build the foundational decentralized layer for Aladdin.
 
-## [S1 Category] System Architects (Brain & Infra)
-*   **Target Vector 1: Lead Infrastructure Engineers (ex-xAI / Tesla Compute Team)**
-    *   **Capability:** Design of massive multi-node GPU training topologies and cluster scaling.
-    *   **Source Pool:** LinkedIn / Technical whitepapers from xAI clusters.
-*   **Target Vector 2: Lead distributed systems professors/architects**
-    *   **Capability:** High-level framework design for asynchronous model serving.
+## *  [S1Category] **Target Candidate: Tri Dao**
+    *   **Project/Framework:** FlashAttention / FlashAttention-2
+    *   **Technical High-Level Capability:** IO-aware exact attention algorithms, raw GPU memory (SRAM/HBM) throughput maximization, and training cluster scaling efficiency.
+    *   **Audit Status:** Top Priority Architect Vector
 
 ## [S2 Category] Core Optimization Engineers (Speed & CUDA)
 *   **Target Vector 1: Core Maintainers of vLLM / TensorRT-LLM**
