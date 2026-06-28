@@ -26,8 +26,9 @@ This matrix tracks absolute top-tier systems engineering talents globally requir
     *   **Technical High-Level Capability:** IO-aware exact attention algorithms, raw GPU memory (SRAM/HBM) throughput maximization, and training cluster scaling efficiency.
     *   **Audit Status:** Top Priority Architect Vector
 
-## [S2 Category] Core Optimization Engineers (Speed & CUDA)
-*   **Target Vector 1: Core Maintainers of vLLM / TensorRT-LLM**
-    *   **Capability:** PagedAttention, raw CUDA kernel optimizations, low-level memory virtualization.
-    *   **Source Pool:** Main branch repository contributors of high-throughput serving systems.
+## [S2 Category] *   **Target Candidate: Woosuk Kwon**
+    *   **Project/Framework:** vLLM (Lead Creator / Co-founder)
+    *   **Technical High-Level Capability:** Inventor of PagedAttention, dynamic memory virtualization for LLM orchestration, and low-level execution layer optimization.
+    *   **Audit Status:** Top Priority Execution Vector
+
  
