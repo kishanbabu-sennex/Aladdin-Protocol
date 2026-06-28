@@ -31,4 +31,13 @@ This matrix tracks absolute top-tier systems engineering talents globally requir
     *   **Technical High-Level Capability:** Inventor of PagedAttention, dynamic memory virtualization for LLM orchestration, and low-level execution layer optimization.
     *   **Audit Status:** Top Priority Execution Vector
 
- 
+ [S3 Category] *   **Target Vector: Lead Distributed Infrastructure Architect (xAI / Grok Compute Team)**
+    *   **Project/Framework:** 100k+ GPU Massive Multi-Node Cluster Orchestration & RoCEv2 Network Fabric.
+    *   **Technical High-Level Capability:** Slurm/Kubernetes scheduling at exascale, micro-straggler elimination, automated checkpoint recovery.
+    *   **Audit Status:** Priority S1 Head-Hunting Vector
+
+*   **Target Vector: Principal Cluster Systems Architect (Tesla Dojo Compute Team)**
+    *   **Project/Framework:** Dojo Supercomputer Infrastructure / Custom Interconnect Topology.
+    *   **Technical High-Level Capability:** Ultra-low latency cluster scheduling, hardware-level abstraction, zero-copy distributed memory fabric.
+    *   **Audit Status:** Priority S1 Head-Hunting Vector
+
