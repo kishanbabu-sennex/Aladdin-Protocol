@@ -16,3 +16,20 @@ This matrix tracks elite systems engineering candidates from the Edinburgh Syste
 1. **GitHub Commit Logs:** Verification of individual low-level C++/Rust or Python interface implementations within the `ServerlessLLM` repository.
 2. **Hugging Face Checkpoints:** Cross-referencing if any specialized tokenization or model slicing libraries have been deployed under their active handles.
 3. **Twitter/X Technical Vectors:** Tracking their discussions on hardware abstraction, FP8 scaling, or state synchronization parameters.
+  # Project SENNEX // S1-S2 Elite Target Matrix
+### Classification: Architecture Strategy Group (Restricted)
+
+This matrix tracks absolute top-tier systems engineering talents globally required to build the foundational decentralized layer for Aladdin.
+
+## [S1 Category] System Architects (Brain & Infra)
+*   **Target Vector 1: Lead Infrastructure Engineers (ex-xAI / Tesla Compute Team)**
+    *   **Capability:** Design of massive multi-node GPU training topologies and cluster scaling.
+    *   **Source Pool:** LinkedIn / Technical whitepapers from xAI clusters.
+*   **Target Vector 2: Lead distributed systems professors/architects**
+    *   **Capability:** High-level framework design for asynchronous model serving.
+
+## [S2 Category] Core Optimization Engineers (Speed & CUDA)
+*   **Target Vector 1: Core Maintainers of vLLM / TensorRT-LLM**
+    *   **Capability:** PagedAttention, raw CUDA kernel optimizations, low-level memory virtualization.
+    *   **Source Pool:** Main branch repository contributors of high-throughput serving systems.
+ 
