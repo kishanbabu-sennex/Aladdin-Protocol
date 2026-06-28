@@ -40,4 +40,13 @@ This matrix tracks absolute top-tier systems engineering talents globally requir
     *   **Project/Framework:** Dojo Supercomputer Infrastructure / Custom Interconnect Topology.
     *   **Technical High-Level Capability:** Ultra-low latency cluster scheduling, hardware-level abstraction, zero-copy distributed memory fabric.
     *   **Audit Status:** Priority S1 Head-Hunting Vector
+*   **Target Candidate: Yiding Jiang**
+    *   **Current Framework:** xAI (Founding Member / Research Scientist)
+    *   **Technical High-Level Capability:** Large-scale distributed optimization, core infrastructure scaling for Grok.
+    *   **Audit Status:** Top Priority S1 Vector
+
+*   **Target Candidate: Sushil Bahadur**
+    *   **Current Framework:** Tesla (Director, Autopilot & Robotics Platform Engineering)
+    *   **Technical High-Level Capability:** Massive multi-node orchestration, edge-to-cluster runtime synchronization, exascale platform execution.
+    *   **Audit Status:** Top Priority S2 Vector
 
