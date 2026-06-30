@@ -1,4 +1,4 @@
- # Project SENNEX // Aladdin Protocol - Outreach Command Center
+   # Project SENNEX // Aladdin Protocol - Outreach Command Center
 
 ##  Target Pipeline Status
 
@@ -6,8 +6,8 @@
 | :--- | :--- | :--- | :--- | :--- |
 | **Tri Dao** | FlashAttention Creator | GitHub / Princeton Academic | Scheduled (Runs 8:30 PM IST) | Wait for Architectural Review |
 | **Woosuk Kwon** | vLLM / PagedAttention | GitHub Maintainer Panel | Scheduled (Runs 10:00 PM IST) | Wait for Architectural Review |
-| **Yiding Jiang** | xAI Founding Member | LinkedIn / Research Network | Locked | Ready for Second Wave Strike |
-| **Sushil Bahadur** | Tesla Autopilot Director | LinkedIn Executive Profile | Locked | Ready for Second Wave Strike |
+| **Yiding Jiang** | xAI Founding Member | CMU Academic Router | Scheduled (Runs 30-Jun 8:30 PM) | Wait for Architectural Review |
+| **Sushil Bahadur** | Tesla Autopilot Director | IEEE Identity Relay | Scheduled (Runs 30-Jun 10:00 PM) | Wait for Architectural Review |
 
 ##  Secure Assets Registry
 *   **Pitch Document:** `Project_GS-SHIPS_Executive_Brief.pdf` (Locked & Ready)
