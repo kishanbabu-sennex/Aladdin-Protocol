@@ -1,6 +1,12 @@
-# Aladdin Protocol - Velocity Acceleration & Matrix Routing
-# SENNEX Core Processing Node
+# Aladdin Protocol: Core Logic & Synchronization Matrix
 
+## 1. Terrestrial Mesh Topology
+The network maps idle edge-node states via a heterogeneous handshake protocol. Instead of pushing data to a centralized cloud, states are distributed as cryptographic fragments across global routing layers.
+
+## 2. Sub-Nanosecond Failure Mitigation (Autonomous Space Shifting)
+If terrestrial communication networks fall below a 99% operational threshold, the routing layer automatically invokes the orbital failover protocol. 
+* **Velocity:** < 1 nanosecond execution.
+* **Mechanism:** State sync shifts directly to the 1% space-based orbital network topology without external human intervention.
 import numpy as np
 
 class AladdinLogicNode:
