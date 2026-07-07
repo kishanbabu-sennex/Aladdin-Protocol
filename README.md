@@ -1,34 +1,13 @@
-Aladdin Protocol Specification
-​1. Core Architectural Overview
-​This repository outlines the theoretical framework and safety protocols for the Aladdin network, focusing on high-throughput scaling across decentralized neuromorphic nodes.
-​2. Technical Objectives
-​1000x Efficiency Performance Goals: Optimizing distributed mesh layers to reduce communication constraints.
-​Hardware Bridge: Interfacing next-generation logic frameworks with advanced neuromorphic chip architectures.
-​3. Safety & Control Framework
-​Autonomous coordination protocols with zero-human-touch stability models.
-​Restricted boundary testing for decentralized intelligence nodes
-
  # Project SENNEX: The Aladdin Protocol
 
-Official repository for the architectural specifications and decentralized intelligence layer of Project SENNEX.
+An autonomous highly distributed paradigm designed to operate without reliance on centralized data centers. The network leverages distributed heterogeneous node topologies to maintain zero-server high-performance execution
 
-## Overview
-Project SENNEX focuses on advancing decentralized intelligence frameworks and next-generation neuromorphic mesh architectures, designed with post-quantum lattice security. The core objective is a scalable intelligence layer targeting significant optimization paradigms over standard distributed architectures.
+## Core Pillars
+* **Zero-Server Mesh Architecture:** Exploits idle cycles across edge hardware, distributed devices, and global infrastructure routing layers to sustain compute.
+* **Autonomous Space Failover:** Engineered for deterministic sub-nanosecond state migration from terrestrial clusters to space-based orbital nodes without human touch.
+* **Omnipresent Cryptographic Logic:** Zero-trust state routing across public/private infrastructure wherever electric current flows
 
-##  System Architecture
-* **Decentralized Intelligence Layer:** High-throughput node orchestration using advanced consensus logic.
-* **Security Framework:** Post-Quantum Lattice Cryptography ensuring long-term data resilience across the mesh.
-* **Neuromorphic Mesh:** Optimized communication primitives designed to leverage edge-compute acceleration.
+## Repository Structure
+* `app/api/gateway`: Edge routing and entry protocols
+* `CORE_LOGIC.md`: Mathematical foundations of the mesh network state sync
 
-## Project Status
-* **Whitepaper:** Released and available on LinkedIn Featured Showcase.
-* **Core Ledger Integration:** Under Active Development.
-* **Node Orchestration Framework:** Planning / Simulation Phase.
-
-##  Collaboration & Recruitment
-We are currently building our core engineering team. Technical evaluations are underway for specialized roles across system architecture, low-level optimization, and advanced cryptography. 
-
-If you are a systems engineer or cryptographer interested in the project, please reach out via our official communication channels.
-
----
-*Maintained by the Chief Architect of Project SENNEX.*
