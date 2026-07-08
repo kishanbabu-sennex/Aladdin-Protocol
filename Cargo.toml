@@ -1,0 +1,10 @@
+[package]
+name = "aladdin-core"
+version = "0.1.0"
+edition = "2021"
+authors = ["Kishan Babu <chief.architect@sennex>"]
+
+[dependencies]
+tokio = { version = "1.0", features = ["full"] } # For async mesh networking
+rand = "0.8"
+serde = { version = "1.0", features = ["derive"] } # For secure serialization
