@@ -1,0 +1,53 @@
+use tokio::net::{TcpListener, TcpStream};
+use tokio::io::{AsyncReadExt, AsyncWriteExt};
+use std::error::Error;
+use std::time::Instant;
+
+// Hardcoded configuration for Nano-second / Micro-second benchmarking
+const NODE_ADDRESS: &str = "127.0.0.1:8080";
+const BUFFER_SIZE: usize = 1024;
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn Error>> {
+    println!("[SENNEX NODE] Initializing Phase 1 Core Protocol on {}...", NODE_ADDRESS);
+
+    // Start the ultra-low latency listener node
+    let listener = TcpListener::bind(NODE_ADDRESS).await?;
+    println!("[SENNEX NODE] Network Live. Awaiting incoming data streams...");
+
+    loop {
+        let (socket, addr) = listener.accept().await?;
+        // Process each incoming connection in a lightweight, non-blocking asynchronous task
+        tokio::spawn(async move {
+            println!("[SENNEX] Connection established with peer: {}", addr);
+            if let Err(e) = handle_peer_stream(socket).await {
+                eprintln!("[SENNEX ERROR] Stream processing failed: {}", e);
+            }
+        });
+    }
+}
+
+// In-Memory processing function bypassing disk I/O for speed
+async fn handle_peer_stream(mut socket: TcpStream) -> Result<(), Box<dyn Error>> {
+    let mut buffer = [0; BUFFER_SIZE];
+
+    loop {
+        let start_time = Instant::now();
+        let bytes_read = socket.read(&mut buffer).await?;
+
+        if bytes_read == 0 {
+            break; // Stream completed by peer
+        }
+
+        // Processing latency benchmark
+        let duration = start_time.elapsed();
+        println!(
+            "[SENNEX] Raw packet processed in memory. Size: {} bytes | Latency: {:?}",
+            bytes_read, duration
+        );
+
+        // Echoing back zero-copy acknowledgement immediately to peer
+        socket.write_all(&buffer[..bytes_read]).await?;
+    }
+    Ok(())
+}
