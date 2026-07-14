@@ -1,11 +1,12 @@
- use tokio::net::{TcpListener, TcpStream};
+ u use tokio::net::{TcpListener, TcpStream, UdpSocket};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use std::error::Error;
-use std::time::Instant;
+use std::time::{Instant, Duration};
 use std::convert::TryInto;
 
 // ---- 1. System Configuration and Constants ----
 const NODE_ADDRESS: &str = "127.0.0.1:8080";
+const UDP_DISCOVERY_ADDRESS: &str = "239.255.255.250:1900"; // Multicast IP for discovery
 const BUFFER_SIZE: usize = 1024;
 const MAGIC_BYTES: &[u8; 4] = b"SNX1"; 
 const HEADER_SIZE: usize = 12;         
@@ -54,7 +55,15 @@ async fn main() -> Result<(), Box<dyn Error>> {
         return Ok(());
     }
 
-    println!("[SENNEX NODE] Initializing Phase 1 Live Protocol on {}...", NODE_ADDRESS);
+    println!("[SENNEX NODE] Initializing Phase 2 Protocol on {}...", NODE_ADDRESS);
+    
+    // Start background peer discovery signal
+    tokio::spawn(async {
+        if let Err(e) = start_peer_discovery().await {
+            eprintln!("[SENNEX DISCOVERY ERROR] {}", e);
+        }
+    });
+
     let listener = TcpListener::bind(NODE_ADDRESS).await?;
     println!("[SENNEX NODE] Network Live. Awaiting incoming data streams...");
 
@@ -88,7 +97,21 @@ async fn handle_peer_stream(mut socket: TcpStream) -> Result<(), Box<dyn Error>>
     Ok(())
 }
 
-// ---- 5. Local Cluster Simulation Engine ----
+// ---- 5. UDP Peer Discovery Mechanism (New) ----
+async fn start_peer_discovery() -> Result<(), Box<dyn Error>> {
+    let socket = UdpSocket::bind("0.0.0.0:0").await?;
+    socket.set_broadcast(true)?;
+    
+    println!("[SENNEX DISCOVERY] Broadcasting discovery beacon to the network...");
+    
+    loop {
+        let msg = b"SENNEX_NODE_PING";
+        socket.send_to(msg, UDP_DISCOVERY_ADDRESS).await?;
+        tokio::time::sleep(Duration::from_secs(5)).await; // Ping every 5 seconds
+    }
+}
+
+// ---- 6. Local Cluster Simulation Engine ----
 async fn run_local_simulation() -> Result<(), Box<dyn Error>> {
     let listener = TcpListener::bind(NODE_ADDRESS).await?;
     tokio::spawn(async move {
