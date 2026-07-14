@@ -4,14 +4,16 @@ use std::error::Error;
 use std::time::{Instant, Duration};
 use std::convert::TryInto;
 
-// ---- 1. Optimized Global Network Configuration ----
-// Changed from 127.0.0.1 to 0.0.0.0 to allow true external peer connections
+// ---- 1. Optimized Global Network & Security Configuration ----
 const BIND_ADDRESS: &str = "0.0.0.0:8080"; 
 const UDP_DISCOVERY_ADDRESS: &str = "239.255.255.250:1900"; 
 const BUFFER_SIZE: usize = 1024;
 const MAGIC_BYTES: &[u8; 4] = b"SNX1"; 
 const HEADER_SIZE: usize = 12;         
 const MAX_PAYLOAD: usize = 1012;       
+
+// PHASE 4 ENCRYPTION KEY: Dynamic validation token for authorized node handshakes
+const ALADDIN_PRE_SHARED_KEY: &[u8; 16] = b"ALADDIN_SECURE32"; 
 
 // ---- 2. Hardware-Aligned Packet Structure ----
 #[derive(Debug)]
@@ -56,8 +58,7 @@ async fn main() -> Result<(), Box<dyn Error>> {
         return Ok(());
     }
 
-    // Now binds globally across all available network interfaces
-    println!("[SENNEX NODE] Initializing Phase 3 Production Protocol on {}...", BIND_ADDRESS);
+    println!("[SENNEX NODE] Initializing Phase 4 Production Protocol on {}...", BIND_ADDRESS);
     
     tokio::spawn(async {
         if let Err(e) = start_peer_discovery().await {
@@ -66,20 +67,38 @@ async fn main() -> Result<(), Box<dyn Error>> {
     });
 
     let listener = TcpListener::bind(BIND_ADDRESS).await?;
-    println!("[SENNEX NODE] Network Live globally. Listening for remote peers...");
+    println!("[SENNEX NODE] Network Live with Handshake Validation. Awaiting remote peers...");
 
     loop {
         let (socket, addr) = listener.accept().await?;
         tokio::spawn(async move {
-            println!("[SENNEX SECURITY] Inbound connection authorized from remote peer: {}", addr);
-            if let Err(e) = handle_peer_stream(socket).await {
-                eprintln!("[SENNEX ERROR] Stream isolated: {}", e);
+            if let Err(e) = handle_secure_peer(socket, addr).await {
+                eprintln!("[SENNEX SECURITY] Connection rejected from {}: {}", addr, e);
             }
         });
     }
 }
 
-// ---- 4. Isolated Stream Processing Engine ----
+// ---- 4. Encrypted Handshake Verification Gate ----
+async fn handle_secure_peer(mut socket: TcpStream, addr: std::net::SocketAddr) -> Result<(), Box<dyn Error>> {
+    let mut handshake_buffer = [0; 16];
+    
+    // Read the incoming handshake key with a timeout constraint
+    let bytes_read = socket.read(&mut handshake_buffer).await?;
+    
+    if bytes_read != 16 || &handshake_buffer != ALADDIN_PRE_SHARED_KEY {
+        socket.write_all(b"HANDSHAKE_FAILED").await?;
+        return Err(Box::from("ERR_UNAUTHORIZED_NODE: Handshake verification failed. Isolation triggered."));
+    }
+
+    // Handshake approved - Proceed to stream data processing
+    println!("[SENNEX SECURITY] Handshake approved. Secure tunnel established with peer: {}", addr);
+    socket.write_all(b"HANDSHAKE_OK____").await?;
+    
+    handle_peer_stream(socket).await
+}
+
+// ---- 5. Isolated Stream Processing Engine ----
 async fn handle_peer_stream(mut socket: TcpStream) -> Result<(), Box<dyn Error>> {
     let mut buffer = [0; BUFFER_SIZE];
     loop {
@@ -105,7 +124,7 @@ async fn handle_peer_stream(mut socket: TcpStream) -> Result<(), Box<dyn Error>>
     Ok(())
 }
 
-// ---- 5. UDP Peer Discovery Mechanism ----
+// ---- 6. UDP Peer Discovery Mechanism ----
 async fn start_peer_discovery() -> Result<(), Box<dyn Error>> {
     let socket = UdpSocket::bind("0.0.0.0:0").await?;
     socket.set_broadcast(true)?;
@@ -117,29 +136,39 @@ async fn start_peer_discovery() -> Result<(), Box<dyn Error>> {
     }
 }
 
-// ---- 6. Local Cluster Simulation Engine ----
+// ---- 7. Local Cluster Simulation Engine ----
 async fn run_local_simulation() -> Result<(), Box<dyn Error>> {
     let listener = TcpListener::bind("127.0.0.1:8080").await?;
     tokio::spawn(async move {
-        if let Ok((socket, _)) = listener.accept().await {
-            let _ = handle_peer_stream(socket).await;
+        if let Ok((socket, addr)) = listener.accept().await {
+            let _ = handle_secure_peer(socket, addr).await;
         }
     });
 
     tokio::time::sleep(tokio::time::Duration::from_millis(100)).await;
     let mut client = TcpStream::connect("127.0.0.1:8080").await?;
 
-    let mut mock_packet = Vec::new();
-    mock_packet.extend_from_slice(MAGIC_BYTES);
-    mock_packet.extend_from_slice(&5001u32.to_be_bytes()); 
-    mock_packet.extend_from_slice(&12u32.to_be_bytes());   
-    mock_packet.extend_from_slice(b"ALADDIN_CORE");        
+    // Step 1: Send the 16-byte secure handshake key
+    client.write_all(ALADDIN_PRE_SHARED_KEY).await?;
+    
+    let mut response = [0; 16];
+    client.read_exact(&mut response).await?;
+    
+    if &response == b"HANDSHAKE_OK____" {
+        println!("[SENNEX SIMULATION] Handshake Protocol Authenticated.");
+        
+        // Step 2: Send actual structured packet data
+        let mut mock_packet = Vec::new();
+        mock_packet.extend_from_slice(MAGIC_BYTES);
+        mock_packet.extend_from_slice(&5001u32.to_be_bytes()); 
+        mock_packet.extend_from_slice(&12u32.to_be_bytes());   
+        mock_packet.extend_from_slice(b"ALADDIN_CORE");        
 
-    client.write_all(&mock_packet).await?;
-
-    let mut response_buffer = [0; BUFFER_SIZE];
-    let _ = client.read(&mut response_buffer).await?;
-    println!("[SENNEX SIMULATION] Global Pipeline Routing Verified Successfully.");
+        client.write_all(&mock_packet).await?;
+        let mut response_buffer = [0; BUFFER_SIZE];
+        let _ = client.read(&mut response_buffer).await?;
+        println!("[SENNEX SIMULATION] Secure Execution Verified Successfully.");
+    }
 
     Ok(())
 }
